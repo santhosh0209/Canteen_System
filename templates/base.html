@@ -1,0 +1,66 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Canteen</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Piedra&family=Rubik&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'assets/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'custom.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="body">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check">
+            <i class=" fas fa-bars" id="btn"></i>
+            <i class=" fas fa-times" id="cancel"></i>
+
+        </label>
+        <h2>MY Canteen</h2>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'order-summary' %}">Cart</a></li>
+            {% if request.user.is_superuser %}
+            <li><a href="{% url 'admin:index' %}">{{request.user}}</a></li>
+            {% else %}
+            <li><a href="#">{{request.user}}</a></li>
+            {% endif %} {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">SignUP</a></li>
+            {% endif %}
+
+
+        </ul>
+    </nav>
+    <div style="margin-bottom: 5rem;" class="">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        </div>
+        {% endfor %} {% endif %}
+    </div>
+    {% block content %} {% endblock %}
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'scripts.js' %}"></script>
+
+
+</body>
+
+</html>

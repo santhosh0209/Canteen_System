@@ -1,0 +1,12 @@
+{% extends 'base.html'%} {% load static %} {% block content %} {% load bootstrap3 %}
+
+<div style="margin-top: 2rem;" class="container  mt-6">
+    <div class="row">
+        <div class="col-md-6 mt-6 font-ram">
+            <form method="post"> {% csrf_token %} {% bootstrap_form form %}
+                <button type="submit" class="btn btn-danger">Login</button></form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

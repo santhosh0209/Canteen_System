@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block content %}
+
+<main class="">
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large" src="{{ item.image.url }}" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3 style="text-transform: capitalize;">{{ item.title }} {% if object.label%}
+                            <span style="font-size:15px ; font-family: cursive; text-align: center;" class="badge badge-pill {{object.label}}-color">{{ object.get_label_display }}</span> {% endif %}</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>{{object.get_category_display}}</span>
+                        </div>
+                        <div class="product__details__price">{% if object.discount_price %}
+                            <span class="mr-1">
+                            <del> &#8377;{{ object.price }}</del>
+                          </span>
+                            <span> &#8377;{{ object.discount_price }}</span> {% else %}
+                            <span> &#8377;{{ object.price }}</span> {% endif %}
+                        </div>
+                        <p>{{ object.description }}</p>
+                        <div class="product__details__quantity">
+                            <!-- <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div> -->
+                        </div>
+                        <a href="{{ object.get_add_to_cart_url }}" class="primary-btn">ADD TO CART</a>
+                        <ul>
+                            <li><b>Availability</b> <span>{{object.get_availability_display}}</span></li>
+                            <li><b>Category</b> <span>{{object.get_category_display}}</span></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="cart">
+
+
+            <div class="wrapper">
+                <h1>Menu</h1>
+                {% if user.is_authenticated %}
+                <a href="{% url 'order-summary' %}"> <span><i class="shopping-cart"></i></span></a>
+                {% else %}
+                <a href="{% url 'login' %}"> <span><i class="shopping-cart"></i></span></a>
+
+                {% endif%}
+
+                <div class="clear"></div>
+
+                <div class="items">
+                    {% for food in food %}
+                    <div class="item">
+                        {% if food.image.url %}
+                        <img src="{{food.image.url}}" alt="" />
+                        <br>
+                        <h2>{{food.name}}{{now}}</h2>
+
+                        <p>&#8377;{{food.price}}
+                        </p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add-to-cart' food.pk %}"> <button class="add-to-cart" type="button">Add to cart</button>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}"> <button class="add-to-cart" type="button">Add to cart</button>
+                        </a>
+
+                        {% endif%} {% else %}
+                        <img src="{% static 'images/not.jpg'%}" alt="" />
+                        <br>
+                        <h2>{{food.name}}{{now}}</h2>
+
+                        <p>&#8377;{{food.price}}
+                        </p>
+
+                        {% if user.is_authenticated %}
+                        <a href="#"> <button class="add-to-cart" type="button">Add to cart</button>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}"> <button class="add-to-cart" type="button">Add to cart</button>
+                        </a>
+
+                        {% endif%} {% endif %}
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+<!--/ wrapper -->
+
+
+</body>
+
+</html>
