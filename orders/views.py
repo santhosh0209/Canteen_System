@@ -28,7 +28,7 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(**kwargs)
         now = datetime.now()
         hour = now.hour
-        if hour>=15:
+        if hour>=14:
             context = super().get_context_data(**kwargs)
             return context
         else:
